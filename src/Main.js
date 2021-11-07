@@ -22,6 +22,7 @@ import MyBookings from './Pages/MyBookings/MyBookings';
 import AdminDashboard from './Pages/Admin/AdminDashboard/AdminDashboard';
 import AllBookings from './Pages/Admin/AllBookings/Allbookings';
 import AboutUs from './Pages/AboutUs/AboutUs';
+import NotFound from './Pages/NotFound/NotFound';
 
 const Main = () => {
     const { isloading, user } = useAuth();
@@ -58,16 +59,16 @@ const Main = () => {
                 <Route exact path='/about-us'>
                     <AboutUs></AboutUs>
                 </Route>
-                <Route path='/package-add'>
+                <Route exact path='/package-add'>
                     <PackageAddedForm></PackageAddedForm>
                 </Route>
-                <PrivateRoute path='/package-details/:id'>
+                <PrivateRoute  path='/package-details/:id'>
                     <PackageDetails></PackageDetails>
                 </PrivateRoute>
-                <PrivateRoute path='/my-bookings'>
+                <PrivateRoute exact path='/my-bookings'>
                     <MyBookings></MyBookings>
                 </PrivateRoute>
-                <Route path='/all-bookings'>
+                <Route exact path='/all-bookings'>
                     <AllBookings></AllBookings>
                 </Route>
                 {!user.email ?
@@ -75,6 +76,9 @@ const Main = () => {
                         <Login></Login>
                     </Route> : ''
                 }
+                <Route path="*">
+                    <NotFound></NotFound>
+                </Route>
             </Switch>
             <Footer></Footer>
         </>
